@@ -6,15 +6,13 @@
 </head>
 <body>
 
-
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand minute-hand"></div>
-        <div class="hand second-hand"></div>
-      </div>
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand minute-hand"></div>
+      <div class="hand second-hand"></div>
     </div>
-
+  </div>
 
   <style>
     html {
@@ -71,34 +69,32 @@
   </style>
 
   <script>
-  
+
     const secondHand = document.querySelector('.second-hand');
     const minuteHand = document.querySelector('.minute-hand');
     const hourHand = document.querySelector('.hour-hand');
-    
+
     function setDate() {
-      
+
       const start = new Date();
       const seconds = start.getSeconds();
       const minutes = start.getMinutes();
       const hours = start.getHours();
-      
-      console.log(seconds, minutes, hours);
-      
+
       const degreesOffset = 90;
       const degreesPerSecond = 360 / 60;
       const degreesPerMinute = degreesPerSecond;
       const degreesPerHour = degreesPerMinute * 5; // 360 / 12 = 30
-      
+
       const secondDegrees = seconds * degreesPerSecond + degreesOffset;
       const minuteDegrees = minutes * degreesPerMinute + degreesOffset;
       const hourDegrees = hours * degreesPerHour + degreesOffset;
-      
+
       secondHand.style.transform = `rotate(${secondDegrees}deg)`;
       minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
       hourHand.style.transform = `rotate(${hourDegrees}deg)`;
     }
-    
+
     setInterval(setDate, 1000);
   </script>
 </body>
