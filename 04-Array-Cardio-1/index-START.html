@@ -31,28 +31,100 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const bornInFifteenHundreds = inventors.filter( function(inventor) {
+      if (inventor.year >= 1500 && inventor.year < 1600) {
+        return true;
+      }
+    });
+
+    const bornIn1500 = inventors.filter( inventor => {
+      return inventor.year >= 1500 && inventor.year < 1600;
+    });
+
+    const fifteen = inventors.filter( inventor => inventor.year >= 1500 && inventor.year < 1600);
+
+    // console.table(bornInFifteenHundreds);
+    // console.table(bornIn1500);
+    console.table(fifteen);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    const fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    console.log(fullNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const birthdateSort = inventors.sort(function(a, b) {
+      if (a.year > b.year) {
+        return 1;
+      }
+      return -1;
+    });
+
+    const ternaryBdaySort = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
+
+    // console.table(birthdateSort);
+    console.table(ternaryBdaySort);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const totalYearsLived = inventors.reduce((total, inventor)  => {
+      return total + (inventor.passed - inventor.year);
+    }, 0);
 
-    // 5. Sort the inventors by years lived
+    console.log(totalYearsLived);
+
+    // 5. Sort the inventors by years lived high to low
+    const sortYearsLived = inventors.sort(function (a, b) {
+      const lastInventor = a.passed - a.year;
+      const nextInventor = b.passed - b.year;
+      return lastInventor > nextInventor? -1: 1;
+    });
+
+    console.table(sortYearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    const links = Array.from(document.querySelectorAll('.mw-category a'));
+    const linkTextContent = links.map(link => link.textContent);
+    const containsDeInName = linkTextContent.filter(boulevardName => boulevardName.includes('de'));
 
+    console.log(containsDeInName);
 
     // 7. sort Exercise
+    // Sort inventors by last name
+    const sortInventorsByLastName = inventors.sort((a, b) => {
+      return a.last.toLowerCase() > b.last.toLowerCase() ? 1: -1;
+    });
+
+    console.table(sortInventorsByLastName);
+
     // Sort the people alphabetically by last name
+    const sortPeopleByLastName =  people.sort();
+    console.table(sortPeopleByLastName);
+
+    // Sort the people by first name
+    const sortPeopleByFirstName = people.sort((a,b) => {
+      const [aLastName, aFirstName] = a.split(', ');
+      const [bLastName, bFirstName] = b.split(', ');
+      return aFirstName > bFirstName ? 1: -1;
+    });
+
+    console.table(sortPeopleByFirstName);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    const transportationCount = data.reduce((count, currItem) => {
+      if(!count[currItem]) {
+        count[currItem] = 0;
+      }
+      count[currItem]++;
+      return count;
+    }, { });
+
+    console.log(transportationCount);
 
   </script>
 </body>
