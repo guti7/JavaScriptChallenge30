@@ -8,3 +8,4 @@ Program by [@wesbos](https://github.com/wesbos).
 ### Table of Contents
 Day 01: [Drum Kit](./01-Drum-Kit)  
 Day 02: [CSS-JS Clock](./02-Clock)
+Day 03: [CSS-Variables](./03-CSS-Variables)
