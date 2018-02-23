@@ -23,6 +23,14 @@
       // Once the data is fetched the promise blob can be used with => then
       // Use of a spread syntax for ECMAScript 2015 - iterable expansion where arguments(0+) are expected
       fetch(endpoint).then(blob => blob.json()).then(data => cities.push(...data));
+
+      function findMatches(wordToMatch, cities) {
+        return cities.filter(place => {
+          // check current place to search for match using regex
+          const regex = new RegExp(wordToMatch, 'gi'); // flags to match global(entire string), insensitive (ignore case)
+          return place.city.match(regex) || place.state.match(regex);
+        });
+      }
     </script>
   </body>
 </html>
