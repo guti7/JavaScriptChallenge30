@@ -17,6 +17,12 @@
 
     <script>
       const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+      const cities = [];
+      // new interface for fetching resources, familiar to XMLHttpResquest, returns a Promise
+      // Once the data is fetched the promise blob can be used with => then
+      // Use of a spread syntax for ECMAScript 2015 - iterable expansion where arguments(0+) are expected
+      fetch(endpoint).then(blob => blob.json()).then(data => cities.push(...data));
     </script>
   </body>
 </html>
