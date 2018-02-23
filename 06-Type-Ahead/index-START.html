@@ -34,19 +34,27 @@
 
       function displayMatches() {
         const matchesArray = findMatches(this.value, cities);
-        const html = matchesArray.map(place => {
-          const replaceRegEx = new RegExp(this.value, 'gi');
-          const cityName = place.city.replace(replaceRegEx, `<span class="hl">${this.value}</span>`);
-          const cityState = place.state.replace(replaceRegEx, `<span class="hl">${this.value}</span>`);
-          const cityPopulation = numberWithCommas(place.population);
-          return `
+
+        let html;
+        if (this.value === "") {
+          html = `
+            <li>Filter for a city</li>
+            <li>or a state</li>
+          `;
+        } else {
+          html = matchesArray.map(place => {
+            const replaceRegEx = new RegExp(this.value, 'gi');
+            const cityName = place.city.replace(replaceRegEx, `<span class="hl">${this.value}</span>`);
+            const cityState = place.state.replace(replaceRegEx, `<span class="hl">${this.value}</span>`);
+            const cityPopulation = numberWithCommas(place.population);
+            return `
             <li>
               <span class="name">${cityName}, ${cityState}</span>
               <span class="population">${cityPopulation}</span>
             </li>
-          `;
-        }).join('');
-
+            `;
+          }).join('');
+        }
         suggestions.innerHTML = html;
       }
 
