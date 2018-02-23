@@ -38,15 +38,20 @@
           const replaceRegEx = new RegExp(this.value, 'gi');
           const cityName = place.city.replace(replaceRegEx, `<span class="hl">${this.value}</span>`);
           const cityState = place.state.replace(replaceRegEx, `<span class="hl">${this.value}</span>`);
+          const cityPopulation = numberWithCommas(place.population);
           return `
             <li>
               <span class="name">${cityName}, ${cityState}</span>
-              <span class="population">${place.population}</span>
+              <span class="population">${cityPopulation}</span>
             </li>
           `;
         }).join('');
 
         suggestions.innerHTML = html;
+      }
+
+      function numberWithCommas(n) {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       }
 
       const searchInput = document.querySelector('.search');
