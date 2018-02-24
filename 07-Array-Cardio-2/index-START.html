@@ -57,9 +57,29 @@
       const comment2 = comments.find(comment => (comment.id === 823423));
 
       console.log(comment2);
+
       // Array.prototype.findIndex()
       // Find the comment with this ID
       // delete the comment with the ID of 823423
+      const indexOfId = comments.findIndex(comment => comment.id === 123523);
+      const foundComment = comments[indexOfId];
+
+      console.log("found comment:");
+      console.log(foundComment);
+
+      // create a new array with the updates
+      const newComments = [
+        ...comments.slice(0, indexOfId), // end is not included [start, end)
+        ...comments.slice(indexOfId + 1)  // from start to the end of array.
+      ]
+
+      console.table(newComments);
+
+      // modify the original array with splice
+      console.log("original array:")
+      console.table(comments);
+      comments.splice(indexOfId, 1);
+      console.table(comments);
 
     </script>
   </body>
