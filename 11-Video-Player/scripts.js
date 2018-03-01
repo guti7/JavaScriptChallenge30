@@ -8,22 +8,29 @@ const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
 
 /* Build the functions */
+// Play/pause video toggle
 function togglePlay() {
   const method = video.paused ? 'play' : 'pause';
   video[method]();
 }
 
+// Update UI for the play pause toggle button
 function updatePlayerToggle() {
   const icon = this.paused ? '❚❚' : '►';
   playerToggleButton.textContent = icon;
 }
 
-// skipping
+// Skipping video play
 function skip() {
-  console.log('skipping');
-  console.log(this.dataset); // the current button's data attribute set.
-  console.log(this.dataset.skip) // the value at the data-skip attribute
+  // this.dataset; the current button's data attribute set.
+  // this.dataset.skip; the value at the data-skip attribute
   video.currentTime += parseFloat(this.dataset.skip);
+}
+
+// Update slider values
+function handleRangeUpdate() {
+  // update the video volume property with the range's(this) value property
+  video[this.name] = this.value;
 }
 
 /* Hook up event listeners */
@@ -32,8 +39,12 @@ video.addEventListener('click', togglePlay);
 video.addEventListener('play', updatePlayerToggle);
 video.addEventListener('pause', updatePlayerToggle);
 
-// Toggle button UI
+// Toggle button
 playerToggleButton.addEventListener('click', togglePlay);
 
 // Skip buttons
 skipButtons.forEach(button => button.addEventListener('click', skip));
+
+// Range sliders
+ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
+ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
