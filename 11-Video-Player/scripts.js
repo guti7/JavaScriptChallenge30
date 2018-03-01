@@ -33,6 +33,12 @@ function handleRangeUpdate() {
   video[this.name] = this.value;
 }
 
+// Update progress bar for video playing time
+function handleProgress() {
+  const percent = (video.currentTime / video.duration) * 100;
+  progressBar.style.flexBasis = `${percent}%`;
+}
+
 /* Hook up event listeners */
 // Video
 video.addEventListener('click', togglePlay);
@@ -48,3 +54,6 @@ skipButtons.forEach(button => button.addEventListener('click', skip));
 // Range sliders
 ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
 ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
+
+// Progress bar time update
+video.addEventListener('timeupdate', handleProgress);
