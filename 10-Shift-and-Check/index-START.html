@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -100,6 +100,30 @@
 
 <script>
 
+  let lastChecked;
+
+  function handleClick(e) {
+
+    let inBetween = false;
+
+    if (e.shiftKey && this.checked) {
+      checkboxes.forEach(box => {
+
+        if (this === box || lastChecked === box) {
+          inBetween = !inBetween;
+        }
+
+        if (inBetween) {
+          box.checked = true;
+        }
+      });
+    }
+
+    lastChecked = this;
+  }
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+  checkboxes.forEach(checkbos => checkbos.addEventListener('click', handleClick));
 </script>
 </body>
 </html>
