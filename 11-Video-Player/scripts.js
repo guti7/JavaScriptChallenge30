@@ -14,15 +14,26 @@ function togglePlay() {
 }
 
 function updatePlayerToggle() {
-  console.log(playerToggleButton);
   const icon = this.paused ? '❚❚' : '►';
-  console.log(`icon: ${icon}`);
   playerToggleButton.textContent = icon;
 }
 
+// skipping
+function skip() {
+  console.log('skipping');
+  console.log(this.dataset); // the current button's data attribute set.
+  console.log(this.dataset.skip) // the value at the data-skip attribute
+  video.currentTime += parseFloat(this.dataset.skip);
+}
+
 /* Hook up event listeners */
+// Video
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updatePlayerToggle);
 video.addEventListener('pause', updatePlayerToggle);
 
+// Toggle button UI
 playerToggleButton.addEventListener('click', togglePlay);
+
+// Skip buttons
+skipButtons.forEach(button => button.addEventListener('click', skip));
