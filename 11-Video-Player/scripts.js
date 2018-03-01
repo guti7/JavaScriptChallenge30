@@ -39,6 +39,13 @@ function handleProgress() {
   progressBar.style.flexBasis = `${percent}%`;
 }
 
+// Scrubbing video with clicking and dragging
+function scrub(e) {
+  const timeRatio = (e.offsetX / progress.offsetWidth); // ratio of click location
+  const scrubTime = timeRatio * video.duration;
+  video.currentTime = scrubTime;
+}
+
 /* Hook up event listeners */
 // Video
 video.addEventListener('click', togglePlay);
@@ -57,3 +64,11 @@ ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
 
 // Progress bar time update
 video.addEventListener('timeupdate', handleProgress);
+
+// Scrub the video
+let mousedown = false;
+progress.addEventListener('mousedown', () => mousedown = true);
+progress.addEventListener('mouseup', () => mousedown = false);
+
+progress.addEventListener('mousedown', scrub);
+progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
