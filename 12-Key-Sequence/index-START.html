@@ -7,6 +7,19 @@
 </head>
 <body>
 <script>
+
+  const pressed = [];
+  const secretCode = 'superfly';
+  window.addEventListener('keyup', (e) => {
+    pressed.push(e.key);
+    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+    // check if the pressed array contains the secret
+    if (pressed.join('').includes(secretCode)) {
+      console.log("you found the secret");
+      cornify_add();
+    }
+  })
+
 </script>
 </body>
 </html>
