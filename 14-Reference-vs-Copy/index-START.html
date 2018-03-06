@@ -47,7 +47,7 @@
     // So, how do we fix this? We take a copy instead!
     // one way
     const team2 = players.slice()  // takes a copy of the array
-    team2[2] = "Added in team 2";
+    team2[2] = "Changed in team 2";
     console.log(team2);
 
     // or create a new array and concat the old one in
@@ -61,6 +61,10 @@
     team4[1] = "We are in the spread";
     console.log(team4);
 
+    // Final way
+    const team5 = Array.from(players);
+    team5[0] = "From the original";
+    console.log(team5);
 
     console.log(`original players intact: ${players}`);
 
