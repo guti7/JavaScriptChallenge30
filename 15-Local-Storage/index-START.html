@@ -29,6 +29,34 @@
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
   const items = [];
+
+  function addItem(e) {
+    e.preventDefault(); // stop the form from refreshing page
+
+    const formText = (this.querySelector('[name=item]')).value; // this is the form tag
+    const item = {
+      text: formText,
+      done: false // default
+    }
+    console.log(item);
+    items.push(item);
+    populateList(items, itemsList);
+    this.reset(); // reset the form element box
+  }
+
+  // Add the html to display list of items
+  function populateList(plates = [], platesList) {
+    platesList.innerHTML = plates.map((plate, i) => {
+      return `
+        <li>
+          <label for="">${plate.text}</label>
+        </li>
+      `; // some html
+    }).join(''); // map returns an array but you need a string of all the items.
+  }
+
+  addItems.addEventListener('submit', addItem);
+
 </script>
 
 </body>
