@@ -3,7 +3,8 @@ html {
   background: url('http://wes.io/hx9M/oh-la-la.jpg') center no-repeat;
   background-size: cover;
   min-height: 100vh;
-  display: flow-rootflex;
+  display: flex;
+  /* display: flow-root; */
   justify-content: center;
   align-items: center;
   text-align: center;

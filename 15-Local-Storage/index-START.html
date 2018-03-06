@@ -46,10 +46,12 @@
 
   // Add the html to display list of items
   function populateList(plates = [], platesList) {
+    // How to update just the newly added item instead of the whole list.
     platesList.innerHTML = plates.map((plate, i) => {
       return `
         <li>
-          <label for="">${plate.text}</label>
+          <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''}/>
+          <label for="item${i}">${plate.text}</label>
         </li>
       `; // some html
     }).join(''); // map returns an array but you need a string of all the items.
