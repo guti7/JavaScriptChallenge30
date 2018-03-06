@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LocalStorage</title>
+  <title>Local Storage</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,8 +28,9 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(window.localStorage.getItem('items')) || [];
 
+  // Add the item to plates list
   function addItem(e) {
     e.preventDefault(); // stop the form from refreshing page
 
@@ -41,6 +42,8 @@
     console.log(item);
     items.push(item);
     populateList(items, itemsList);
+    // Set item to local Storage - Chrome
+    window.localStorage.setItem('items', JSON.stringify(items)); // Only use strings in local storage
     this.reset(); // reset the form element box
   }
 
@@ -58,6 +61,8 @@
   }
 
   addItems.addEventListener('submit', addItem);
+
+  populateList(items, itemsList);
 
 </script>
 
